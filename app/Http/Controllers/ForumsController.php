@@ -14,7 +14,9 @@ class ForumsController extends Controller
      */
     public function index()
     {
-        $forums=Forum::latest()->paginate(2);
+       // $forums=Forum::latest()->paginate(4);
+       $forums=Forum::with(['posts'])->paginate(4);
+       //esta segunda es la magia  tenemos que traer los forums y los post  posts es por la relacion
         
         return view('forums.index',compact('forums'));
     }
