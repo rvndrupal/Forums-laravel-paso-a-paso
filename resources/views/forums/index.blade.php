@@ -41,7 +41,7 @@
             <h2>{{ __("Añadir un nuevo foro") }}</h2>
 
             <hr />
-                {{-- 
+                
             @include('partials.errors')
 
             <form method="POST" action="/forums">
@@ -57,7 +57,7 @@
                 <button type="submit" name="addForum" class="btn btn-default">
                     {{ __("Añadir foro") }}
                 </button>
-            </form> --}}
+            </form>
         </div>
     </div>
 @endsection

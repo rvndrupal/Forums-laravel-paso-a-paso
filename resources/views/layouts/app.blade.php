@@ -71,7 +71,14 @@
                 </div>
             </div>
         </nav>
-        <div class="container">
+        <div class="container" style="padding-bottom: 100px">
+
+                @if(session('message'))
+                <div class="alert alert-{{ session('message')[0] }}">
+                    {{ session('message')[1] }}
+                </div>
+            @endif
+
             @yield('content')
 
         </div>

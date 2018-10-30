@@ -15,7 +15,7 @@ class ForumsController extends Controller
     public function index()
     {
        // $forums=Forum::latest()->paginate(4);
-       $forums=Forum::with(['replies','posts'])->paginate(8);
+       $forums=Forum::with(['replies','posts'])->paginate(3);
        //esta segunda es la magia  tenemos que traer los forums y los post  posts es por la relacion
        //como en la relacion del modelo los pones 
        //return $this->hasManyThrough(Reply::class, Post::class);
@@ -41,8 +41,15 @@ class ForumsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       // dd(request()->all());
+        $this->validate(request(), [
+            'name' => 'required|max:100|unique:forums',
+            'description' => 'required|max:500',
+        ]);
+        Forum::create(request()->all());
+	    return back()->with('message', ['success', __("Foro creado correctamente")]);
     }
+    
 
     /**
      * Display the specified resource.
