@@ -28,4 +28,6 @@ Route::get('/', 'ForumsController@index');
 
 Route::get('/forums/{forum}','ForumsController@show');
 
+Route::get('/posts/{post}', 'PostsController@show');
+
 

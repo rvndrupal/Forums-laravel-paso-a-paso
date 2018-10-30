@@ -12,4 +12,10 @@ class Forum extends Model
     {
         return $this->hasMany(Post::class);
     }
+
+    public function replies() { //relacion a distancia
+        return $this->hasManyThrough(Reply::class, Post::class);
+        
+        // se conecta con la clase reply y a travez de post nos podemos conectar
+	}
 }
