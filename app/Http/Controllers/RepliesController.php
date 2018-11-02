@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Reply;
+use App\Rules\ValidReply;
 use Illuminate\Http\Request;
 
-class ReplyController extends Controller
+class RepliesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,7 +36,17 @@ class ReplyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //nueva regla de validacion 
+        //php artisan make:rule ValidReply
+        $this->validate(request(), [
+		    'reply' => ['required', new ValidReply],
+		    //'file' => 'image'
+        ]);
+
+        //igual que el post se tiene que crear el user_id desde el modelo Reply
+        Reply::create(request()->input());
+
+        return back()->with('message', ['success', __('Respuesta añadida correctamente')]);
     }
 
     /**

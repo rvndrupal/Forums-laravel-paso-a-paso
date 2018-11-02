@@ -6,7 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Forum extends Model
 {
-    protected $fillable=['name','description'];
+    protected $fillable=['name','description' , 'slug'];
+
+
+    //generar las url limpias
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
 
     public function posts()
     {

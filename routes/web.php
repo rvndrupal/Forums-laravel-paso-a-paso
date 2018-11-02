@@ -29,5 +29,19 @@ Route::get('/forums/{forum}','ForumsController@show');
 Route::post('/forums', 'ForumsController@store');
 
 Route::get('/posts/{post}', 'PostsController@show');
+Route::post('/posts', 'PostsController@store');
+
+Route::post('/replies', 'RepliesController@store');
+
+//para mostrar las imagenes
+
+Route::get('/images/{path}/{attachment}', function($path, $attachment) {
+	$storagePath = Storage::disk($path)->getDriver()->getAdapter()->getPathPrefix();
+	$imageFilePath = $storagePath . $attachment;
+
+	if(File::exists($imageFilePath)) {
+		return Image::make($imageFilePath)->response();
+	}
+});
 
 

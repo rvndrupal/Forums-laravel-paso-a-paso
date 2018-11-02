@@ -7,8 +7,9 @@
             <h1 class="text-center text-muted">{{ __("Respuestas al debate :name", ['name' => $post->title]) }}</h1>
 
             <h4>{{ __("Autor del debate") }}: {{ $post->owner->name }}</h4>
+            
 
-            <a href="/forums/{{ $post->forum->id }}" class="btn btn-info pull-right">
+            <a href="/forums/{{ $post->forum->slug }}" class="btn btn-info pull-right">
                 {{ __("Volver al foro :name", ['name' => $post->forum->name]) }}
             </a>
 
@@ -53,9 +54,11 @@
             @if($replies->count())
                 {{ $replies->links() }}
             @endif
+            
 
+            {{--  Se creo en el archivo app/providers/appService  --}}
 
-            {{--  @Logged()
+            @Logged() 
                 <h3 class="text-muted">{{ __("Añadir una nueva respuesta al post :name", ['name' => $post->name]) }}</h3>
                 @include('partials.errors')
             
@@ -68,16 +71,17 @@
                         <textarea id="reply" class="form-control" name="reply">{{ old('reply') }}</textarea>
                     </div>
 
-                    <label class="btn btn-warning" for="file">
+                    {{--  <label class="btn btn-warning" for="file">
                         <input id="file" name="file" type="file" style="display:none;">
                         {{ __("Añadir archivo") }}
-                    </label>
+                    </label>  --}}
                     
                     <button type="submit" name="addReply" class="btn btn-default">{{ __("Añadir respuesta") }}</button>
                 </form>
             @else
                 @include('partials.login_link', ['message' => __("Inicia sessión para responder")])
-            @endLogged()  --}}
+               
+            @endLogged()
         </div>
     </div>
 @endsection

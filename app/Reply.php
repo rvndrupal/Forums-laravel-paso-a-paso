@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Illuminate\Support\Facades\App;
+
 use Illuminate\Database\Eloquent\Model;
 
 class Reply extends Model
@@ -11,6 +13,17 @@ class Reply extends Model
     protected $fillable = ['user_id', 'post_id', 'reply', 'attachment'];
 
     protected $appends = ['forum']; //para poder interactuar con el forum
+
+    protected static function boot() {
+        parent::boot();
+
+        static::creating(function ($reply) {
+            if (! App::runningInConsole()) {
+                $reply->user_id = auth()->id();
+               // self::notifyPostOwner($reply);
+            }
+        });
+    }
 
     public function post() {
     	return $this->belongsTo(Post::class);
